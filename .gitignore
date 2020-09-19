@@ -1,0 +1,12 @@
+data/*
+profile/*
+*.swp
+*.pyc
+__pycache__/*
+result/*
+*.csv
+*.pth
+plots/*
+old/*
+*.log
+todo
