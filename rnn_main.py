@@ -17,6 +17,7 @@ import neptune
 
 from rnn_model import RNN_MODEL1
 from rnn_data import RNNIterator
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 def train(model, input, target, optimizer, criterion, device):
     model.train()
@@ -51,8 +52,39 @@ def evaluate(model, validiter, criterion, device, args):
         
         if end_of_data == 1: break
         
-    print('val_loss: {:f}'.format(total_loss / n_segs))
     return total_loss / n_segs
+
+def test(model, test_loader, device):
+    correct = 0
+    total = 0
+
+    preds = []
+    targets = []
+    
+    with torch.no_grad():
+        for xs, ys, end_of_data in test_loader:
+            xs, ys = xs.to(device), ys.to(device)
+            output = model(xs)
+            output = output[-1,:,:]
+
+            _, output_index = torch.max(output,1)
+            output_index = output_index.reshape(-1,1).detach().cpu().numpy()
+            ys = ys.cpu().numpy()
+
+            preds.append(output_index)
+            targets.append(ys)
+
+            if end_of_data == 1: break
+    
+    preds = np.vstack(preds)
+    targets = np.vstack(targets)
+
+    acc = accuracy_score(targets, preds)
+    prec = precision_score(targets, preds)
+    rec = recall_score(targets, preds)
+    f1 = f1_score(targets, preds)
+
+    return acc, prec, rec, f1
 
 def timeSince(since):
     now = time.time()
@@ -61,7 +93,7 @@ def timeSince(since):
     s -= m * 60
     return '%dm %ds' % (m, s)
 
-def train_main(args):
+def train_main(args, neptune):
     device = torch.device("cuda")
 
     # iterators
@@ -94,18 +126,19 @@ def train_main(args):
         if end_of_data == 1:
             epoch += 1
             print("%d (%s) %.4f" % (epoch, timeSince(start), loss_total / (trainiter.data_len / args.batch_size)))
+            neptune.log_metric('train loss', epoch, loss_total / (trainiter.data_len / args.batch_size))
             torch.save(model, args.out_dir + '/' + args.out_file)
             loss_total=0
 
             val_loss = evaluate(model, validiter, criterion, device, args)
-            
+            print('val_loss: {:f}'.format(val_loss))
+            neptune.log_metric('epoch/valid loss', epoch, val_loss)
 
             if epoch >= args.max_epoch: break
 
-    eval_main(model, testiter, device, neptune=neptune)
+    acc, prec, rec, f1 = test(model, testiter, device)
+    print('acc: {:.4f} | prec: {:.4f} | rec: {:.4f} | f1: {:.4f}'.format(acc, prec, rec, f1))
 
-#neptune.log_metric('epoch/train loss', epoch, loss_total / (trainiter.data_len / args.batch_size))
-#neptune.log_metric('epoch/valid loss', epoch, val_loss)
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
@@ -134,16 +167,14 @@ if __name__ == '__main__':
     parser.add_argument('--tag', type=str, help='')
     args = parser.parse_args()
 
-    '''
     params = vars(args)
 
-    neptune.init('cjlee/AnomalyDetection-Supervised')
-    neptune.create_experiment(name=args.name, params=params)
+    neptune.init('cjlee/AnomalyDetection-Supervised-RNN')
+    experiment = neptune.create_experiment(name=args.name, params=params)
     neptune.append_tag(args.tag)
-    '''
 
     args.out_dir='./result'
-    args.out_file='model.pth'
+    args.out_file=experiment.id + '.pth'
 
     # temporary code for testing
-    train_main(args)
+    train_main(args, neptune)
