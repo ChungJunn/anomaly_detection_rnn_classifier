@@ -117,6 +117,8 @@ def train_main(args, neptune):
 
     loss_total = 0
     epoch=0
+    best_val_loss = None
+    bad_counter = 0
    
     for iloop, (tr_x, tr_y, end_of_data) in enumerate(trainiter):
         tr_x, tr_y = Variable(tr_x).to(device), Variable(tr_y).to(device)
@@ -125,17 +127,28 @@ def train_main(args, neptune):
         
         if end_of_data == 1:
             epoch += 1
+            if epoch >= args.max_epoch: break
+
             print("%d (%s) %.4f" % (epoch, timeSince(start), loss_total / (trainiter.data_len / args.batch_size)))
             neptune.log_metric('train loss', epoch, loss_total / (trainiter.data_len / args.batch_size))
-            torch.save(model, args.out_dir + '/' + args.out_file)
             loss_total=0
 
             val_loss = evaluate(model, validiter, criterion, device, args)
             print('val_loss: {:f}'.format(val_loss))
             neptune.log_metric('epoch/valid loss', epoch, val_loss)
 
-            if epoch >= args.max_epoch: break
+            if best_val_loss is None or val_loss < best_val_loss:
+                bad_counter = 0
+                torch.save(model, args.out_dir + '/' + args.out_file)
+                best_val_loss = val_loss
+                best_epoch = epoch
+            else:
+                bad_counter += 1
+                if bad_counter > args.patience:
+                    print('Early stopping')
+                    break
 
+    model = torch.load(args.out_dir + '/' + args.out_file)
     acc, prec, rec, f1 = test(model, testiter, device)
     print('acc: {:.4f} | prec: {:.4f} | rec: {:.4f} | f1: {:.4f}'.format(acc, prec, rec, f1))
 
