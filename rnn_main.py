@@ -15,10 +15,11 @@ import time
 import argparse
 import neptune
 
-from rnn_model import RNN_MODEL1
+from rnn_model import RNN_MODEL1, RNN_ESM
 from rnn_data import RNNIterator
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+'''
 def train(model, input, target, optimizer, criterion, device):
     model.train()
 
@@ -35,37 +36,16 @@ def train(model, input, target, optimizer, criterion, device):
 
     return output, loss.item()
 
-def evaluate(model, validiter, criterion, device, args):
-    model.eval()
-    total_loss = 0
-    n_segs = 0
-
-    for xs, ys, end_of_data in validiter:
-        xs, ys = xs.to(device), ys.to(device)
-
-        outs = model(xs)
-
-        loss = criterion(outs[-1,:,:], ys.type(torch.int64).squeeze())
-
-        total_loss += loss.item()
-        n_segs += 1
-        
-        if end_of_data == 1: break
-        
-    return total_loss / n_segs
-
+'''
 def test(model, test_loader, device):
-    correct = 0
-    total = 0
-
     preds = []
     targets = []
     
     with torch.no_grad():
         for xs, ys, end_of_data in test_loader:
             xs, ys = xs.to(device), ys.to(device)
-            output = model(xs)
-            output = output[-1,:,:]
+            output = model(xs) # output: rnn_len x bsz x 2 
+            output = output[-1,:,:] # bsz x 2 
 
             _, output_index = torch.max(output,1)
             output_index = output_index.reshape(-1,1).detach().cpu().numpy()
@@ -86,6 +66,125 @@ def test(model, test_loader, device):
 
     return acc, prec, rec, f1
 
+def evaluate_(model, validiter, criterion, device):
+    model.eval()
+    total_loss = 0
+    n_segs = 0
+
+    for xs, ys, end_of_data in validiter:
+        xs, ys = xs.to(device), ys.to(device)
+
+        outs = model(xs)
+
+        loss = criterion(outs[-1,:,:], ys.type(torch.int64).squeeze())
+
+        total_loss += loss.item()
+        n_segs += 1
+        
+        if end_of_data == 1: break
+        
+    return total_loss / n_segs
+
+def train(
+    net: RNN_MODEL1,
+    train_loader: RNNIterator,
+    valid_loader: RNNIterator,
+    patience: int,
+    args: object,
+    dtype: torch.dtype,
+    device: torch.device,
+    savedir: str,
+    neptune: neptune,
+) -> RNN_MODEL1:
+    """
+    Train CNN on provided data set.
+    Args:
+        net: initialized neural network
+        train_loader: DataLoader containing training set
+        parameters: dictionary containing parameters to be passed to the optimizer.
+            - lr: default (0.001)
+            - momentum: default (0.0)
+            - weight_decay: default (0.0)
+            - num_epochs: default (1)
+        dtype: torch dtype
+        device: torch device
+    Returns:
+        nn.Module: trained CNN.
+    """
+    # Initialize network
+    net.to(device)  # pyre-ignore [28]
+    # Define loss and optimizer
+    criterion = nn.NLLLoss()
+    mystring = "optim." + args.optimizer
+
+    if args.optimizer == 'Adam':
+        optimizer = eval(mystring)(net.parameters(), lr=args.lr)
+    else:
+        optimizer = eval(mystring)(net.parameters(), lr=args.lr)
+
+    print("=" * 90)
+    print('data_dim: {:d} | data_len {:d}'.format(train_loader.in_n, train_loader.data_len))
+    print('data_dim: {:d} | data_len {:d}'.format(valid_loader.in_n, valid_loader.data_len))
+    print("=" * 90)
+    print(net)
+    print("=" * 90)
+    print(optimizer)
+    print("=" * 90)
+
+    num_epochs = 1000
+    bc = 0
+    best_val = 0
+    best_net = None
+    train_loss=0.0
+
+    # Train Network
+    # pyre-fixme[6]: Expected `int` for 1st param but got `float`.
+    for epoch in range(num_epochs):
+        if epoch >= args.max_epoch:
+            break
+
+        for iloop, (inputs, labels, end_of_data) in enumerate(train_loader):
+            net.train()
+            if end_of_data == 1:
+                break
+            
+            # move data to proper dtype and device
+            inputs = inputs.to(dtype=dtype, device=device)
+            labels = labels.to(dtype=torch.int64, device=device).squeeze()
+
+            # zero the parameter gradients
+            optimizer.zero_grad()
+
+            # forward + backward + optimize
+            outputs = net(inputs)[-1,:,:] # for RNN
+            loss = criterion(outputs, labels)
+            loss.backward()
+
+            optimizer.step()
+            train_loss += loss.item()
+        
+        # check if validation improves
+        train_loss = train_loss / iloop
+        val = evaluate_(net, valid_loader, criterion, device)
+        print('epoch: {:d} | train: {:.4f} | val: {:.4f}'.format(epoch+1, train_loss, val))
+        #neptune.log_metric('tr loss', epoch, train_loss)
+        #neptune.log_metric('val loss', epoch, val)
+        if epoch==0 or val < best_val:
+            # if yes, save model, init bc, and best_val
+            torch.save(net, savedir)
+            bc = 0
+            best_val = val
+        else:
+            # if no, bc++, check if patience is over
+            bc += 1
+            if bc > patience:
+                break
+
+
+    print('training over')
+    best_net = torch.load(savedir)
+    return best_net
+
 def timeSince(since):
     now = time.time()
     s = now - since
@@ -101,56 +200,57 @@ def train_main(args, neptune):
     validiter = RNNIterator(args.val_path, stat_file=args.stat_file, batch_size = args.batch_size)
     testiter = RNNIterator(args.test_path, stat_file=args.stat_file, batch_size = args.batch_size)
 
-    # model
-    model = RNN_MODEL1(
-            dim_input = args.dim_input,
-            dim_lstm_hidden=args.dim_lstm_hidden,
-            dim_fc_hidden=args.dim_fc_hidden,
-            dim_output=args.dim_out).to(device)
-
-    # training parameters 
-    mystring = "optim." + args.optimizer
-    optimizer = eval(mystring)(model.parameters(), args.lr)
-    criterion = F.nll_loss
+    if args.n_cmt > 1:
+        model = RNN_ESM(
+                n_cmt = args.n_cmt,
+                dim_input = args.dim_input,
+                dim_lstm_hidden=args.dim_lstm_hidden,
+                dim_fc_hidden=args.dim_fc_hidden,
+                dim_output=args.dim_out).to(device)
+    elif args.n_cmt == 1:
+        model = RNN_MODEL1(
+                dim_input = args.dim_input,
+                dim_lstm_hidden=args.dim_lstm_hidden,
+                dim_fc_hidden=args.dim_fc_hidden,
+                dim_output=args.dim_out).to(device)
+    else:
+        print('n_cmt must be natual number')
+        import sys; sys.exit(0)
 
     start = time.time()
 
-    loss_total = 0
-    epoch=0
-    best_val_loss = None
-    bad_counter = 0
-   
-    for iloop, (tr_x, tr_y, end_of_data) in enumerate(trainiter):
-        tr_x, tr_y = Variable(tr_x).to(device), Variable(tr_y).to(device)
-        output, loss = train(model, tr_x, tr_y, optimizer, criterion, device)
-        loss_total += loss
-        
-        if end_of_data == 1:
-            epoch += 1
-            if epoch >= args.max_epoch: break
+    # train the model
+    if args.n_cmt > 1:
+        for i in range(args.n_cmt):
+            model.model_list[i] = train(
+                net=model.model_list[i],
+                train_loader= trainiter,
+                valid_loader= validiter,
+                patience=args.patience,
+                args=args,
+                dtype=torch.float32,
+                device=device,
+                savedir=args.out_dir + '/' + args.out_file,
+                neptune=neptune)
+    else:
+        model = train(
+            net=model,
+            train_loader= trainiter,
+            valid_loader= validiter,
+            patience=args.patience,
+            args=args,
+            dtype=torch.float32,
+            device=device,
+            savedir=args.out_dir + '/' + args.out_file,
+            neptune=neptune)
 
-            print("%d (%s) %.4f" % (epoch, timeSince(start), loss_total / (trainiter.data_len / args.batch_size)))
-            neptune.log_metric('train loss', epoch, loss_total / (trainiter.data_len / args.batch_size))
-            loss_total=0
-
-            val_loss = evaluate(model, validiter, criterion, device, args)
-            print('val_loss: {:f}'.format(val_loss))
-            neptune.log_metric('epoch/valid loss', epoch, val_loss)
-
-            if best_val_loss is None or val_loss < best_val_loss:
-                bad_counter = 0
-                torch.save(model, args.out_dir + '/' + args.out_file)
-                best_val_loss = val_loss
-                best_epoch = epoch
-            else:
-                bad_counter += 1
-                if bad_counter > args.patience:
-                    print('Early stopping')
-                    break
-
-    model = torch.load(args.out_dir + '/' + args.out_file)
     acc, prec, rec, f1 = test(model, testiter, device)
     print('acc: {:.4f} | prec: {:.4f} | rec: {:.4f} | f1: {:.4f}'.format(acc, prec, rec, f1))
+    
+    neptune.set_property('acc', acc)
+    neptune.set_property('prec', prec)
+    neptune.set_property('rec', rec)
+    neptune.set_property('f1', f1)
 
 if __name__ == '__main__':
     import argparse
@@ -178,6 +278,7 @@ if __name__ == '__main__':
     parser.add_argument('--rnn_len', type=int, help='')
     parser.add_argument('--name', type=str, help='')
     parser.add_argument('--tag', type=str, help='')
+    parser.add_argument('--n_cmt', type=int, help='')
     args = parser.parse_args()
 
     params = vars(args)

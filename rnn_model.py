@@ -28,6 +28,62 @@ class RNN_MODEL1(nn.Module):
         cell = torch.zeros(1, Bn, self.dim_hidden1)
         return hidden, cell
 
+class RNN_ESM(nn.Module):
+    def __init__(self, n_cmt, dim_input, dim_lstm_hidden, dim_fc_hidden, dim_output, reload=False, loaddir=None, loadfile=None):
+        self.dim_input = dim_input
+        self.dim_lstm_hidden = dim_lstm_hidden
+        self.dim_fc_hidden = dim_fc_hidden
+        self.dim_out = dim_output
+        self.n_cmt = n_cmt
+        self.model_list = []
+        
+        if reload:
+            self.load(loaddir, loadfile)
+
+        else:
+            for i in range(n_cmt):
+                model = RNN_MODEL1(dim_input, dim_lstm_hidden, dim_fc_hidden, dim_output)
+                self.model_list.append(model)
+    
+    def forward(self, input):
+        out = torch.zeros((input.shape[0], input.shape[1], self.dim_out)).to(input.device)
+        # output: (Tx Bn 2) -> (Bn 2)
+
+        for model in self.model_list:
+            out += model(input)
+
+        out = out / self.n_cmt
+
+        return out
+
+    '''
+    def save(self, savedir, savefile):
+        if not os.path.exists(savedir):
+            os.makedirs(savedir)
+
+        for i in range(self.n_cmt):
+            torch.save(self.model_list[i], savedir + '/' + savefile + str(i))
+    '''
+
+    def load(self, loaddir, loadfile):
+        for i in range(self.n_cmt):
+            model = torch.load(loaddir + '/' + loadfile + str(i))
+            self.model_list.append(model)
+
+    def __call__(self, input):
+        return self.forward(input)
+    
+    def to(self, device):
+        for i in range(self.n_cmt):
+            self.model_list[i].to(device)
+
+        return self
+
+    def eval(self):
+        for i in range(self.n_cmt):
+            self.model_list[i].eval()
+        return
+
 if __name__ == '__main__':
     model = RNN_MODEL1(106,64,32,2)
     x_data = torch.rand(32,32,106)
