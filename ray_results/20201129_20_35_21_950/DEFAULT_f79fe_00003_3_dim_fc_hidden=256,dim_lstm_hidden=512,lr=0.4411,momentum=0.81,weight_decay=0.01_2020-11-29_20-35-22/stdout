@@ -1,0 +1,27 @@
+DEFAULT_f79fe_00003 Train
+RMSprop optimizer
+==========================================================================================
+data_dim: 89 | data_len 87148
+data_dim: 89 | data_len 9683
+==========================================================================================
+RNN_MODEL1(
+  (rnn): LSTM(88, 512)
+  (fc1): Linear(in_features=512, out_features=256, bias=True)
+  (fc2): Linear(in_features=256, out_features=2, bias=True)
+  (relu): ReLU()
+)
+==========================================================================================
+RMSprop (
+Parameter Group 0
+    alpha: 0.99
+    centered: False
+    eps: 1e-08
+    lr: 0.44110000000000005
+    momentum: 0.81
+    weight_decay: 0.01
+)
+==========================================================================================
+Training start 1000
+Train end 340
+Train loss: 93649.03265224064
+Test start

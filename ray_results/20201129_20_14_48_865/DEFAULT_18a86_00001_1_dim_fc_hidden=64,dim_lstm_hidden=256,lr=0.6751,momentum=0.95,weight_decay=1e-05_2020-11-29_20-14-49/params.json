@@ -1,0 +1,7 @@
+{
+  "dim_fc_hidden": 64,
+  "dim_lstm_hidden": 256,
+  "lr": 0.6751,
+  "momentum": 0.9500000000000001,
+  "weight_decay": 1e-05
+}

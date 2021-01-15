@@ -1,0 +1,27 @@
+[ERROR 2020-11-29 20:14:57,611] function_runner.py: 254  Runner Thread raised error.
+Traceback (most recent call last):
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 248, in run
+    self._entrypoint()
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 316, in entrypoint
+    self._status_reporter.get_checkpoint())
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 575, in _trainable_func
+    output = fn()
+  File "rnn_main_tune.py", line 273, in train_main
+    savedir=args.out_dir + '/' + args.out_file,
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/threading.py", line 916, in _bootstrap_inner
+    self.run()
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 267, in run
+    raise e
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 248, in run
+    self._entrypoint()
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 316, in entrypoint
+    self._status_reporter.get_checkpoint())
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 575, in _trainable_func
+    output = fn()
+  File "rnn_main_tune.py", line 273, in train_main
+    savedir=args.out_dir + '/' + args.out_file,
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+

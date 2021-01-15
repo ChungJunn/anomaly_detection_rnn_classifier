@@ -1,0 +1,39 @@
+Failure # 1 (occurred at 2020-11-29_20-12-06)
+Traceback (most recent call last):
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/trial_runner.py", line 726, in _process_trial
+    result = self.trial_executor.fetch_result(trial)
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/ray_trial_executor.py", line 489, in fetch_result
+    result = ray.get(trial_future[0], timeout=DEFAULT_GET_TIMEOUT)
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/worker.py", line 1452, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(TuneError): [36mray::ImplicitFunc.train()[39m (pid=20320, ip=203.252.107.212)
+  File "python/ray/_raylet.pyx", line 482, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 436, in ray._raylet.execute_task.function_executor
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/trainable.py", line 336, in train
+    result = self.step()
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 366, in step
+    self._report_thread_runner_error(block=True)
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 513, in _report_thread_runner_error
+    .format(err_tb_str)))
+ray.tune.error.TuneError: Trial raised an exception. Traceback:
+[36mray::ImplicitFunc.train()[39m (pid=20320, ip=203.252.107.212)
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 248, in run
+    self._entrypoint()
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 316, in entrypoint
+    self._status_reporter.get_checkpoint())
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/ray/tune/function_runner.py", line 575, in _trainable_func
+    output = fn()
+  File "rnn_main_tune.py", line 258, in train_main
+    dim_output=args.dim_out).to(device)
+  File "/home/mi-lab02/rnn_classifier/rnn_model.py", line 12, in __init__
+    self.fc1 = nn.Linear(self.dim_hidden1, self.dim_hidden2)
+  File "/home/mi-lab02/.local/lib/python3.6/site-packages/torch/nn/modules/linear.py", line 76, in __init__
+    self.weight = Parameter(torch.Tensor(out_features, in_features))
+TypeError: new() received an invalid combination of arguments - got (float, int), but expected one of:
+ * (*, torch.device device)
+      didn't match because some of the arguments have invalid types: (!float!, !int!)
+ * (torch.Storage storage)
+ * (Tensor other)
+ * (tuple of ints size, *, torch.device device)
+ * (object data, *, torch.device device)
+

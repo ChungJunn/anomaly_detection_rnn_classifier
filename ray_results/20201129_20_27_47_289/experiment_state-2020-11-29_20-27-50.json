@@ -1,0 +1,683 @@
+{
+  "checkpoints": [
+    {
+      "trainable_name": "DEFAULT",
+      "trial_id": "e9bfd_00000",
+      "config": {
+        "lr": 0.7858,
+        "momentum": 0.8300000000000001,
+        "dim_lstm_hidden": 256,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.01
+      },
+      "local_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+      "evaluated_params": {
+        "lr": 0.7858,
+        "momentum": 0.8300000000000001,
+        "dim_lstm_hidden": 256,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.01
+      },
+      "experiment_tag": "0_dim_fc_hidden=128,dim_lstm_hidden=256,lr=0.7858,momentum=0.83,weight_decay=0.01",
+      "location": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "8004953a000000000000008c0e7261792e74756e652e747269616c948c084c6f636174696f6e9493942981947d94288c08686f73746e616d65944e8c03706964944e75622e"
+      },
+      "resources": {
+        "cpu": 1,
+        "gpu": 0.2,
+        "memory": 0,
+        "object_store_memory": 0,
+        "extra_cpu": 0,
+        "extra_gpu": 0,
+        "extra_memory": 0,
+        "extra_object_store_memory": 0,
+        "custom_resources": {},
+        "extra_custom_resources": {}
+      },
+      "stopping_criterion": {},
+      "loggers": "80044e2e",
+      "log_to_file": [
+        "stdout",
+        "stderr"
+      ],
+      "sync_to_driver_fn": "80044e2e",
+      "verbose": true,
+      "max_failures": 0,
+      "last_result": {},
+      "last_update_time": -Infinity,
+      "metric_analysis": {},
+      "n_steps": [
+        5,
+        10
+      ],
+      "metric_n_steps": {},
+      "export_formats": [],
+      "status": "ERROR",
+      "start_time": 1606649270.1730728,
+      "logdir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289/DEFAULT_e9bfd_00000_0_dim_fc_hidden=128,dim_lstm_hidden=256,lr=0.7858,momentum=0.83,weight_decay=0.01_2020-11-29_20-27-50",
+      "runner": null,
+      "result_logger": null,
+      "last_debug": 0,
+      "error_file": null,
+      "error_msg": null,
+      "trial_name_creator": null,
+      "custom_trial_name": null,
+      "custom_dirname": null,
+      "saving_to": null,
+      "remote_checkpoint_dir_prefix": null,
+      "checkpoint_freq": 0,
+      "checkpoint_at_end": false,
+      "keep_checkpoints_num": null,
+      "checkpoint_score_attr": "training_iteration",
+      "sync_on_checkpoint": true,
+      "checkpoint_manager": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "80049566010000000000008c1b7261792e74756e652e636865636b706f696e745f6d616e61676572948c11436865636b706f696e744d616e616765729493942981947d94288c146b6565705f636865636b706f696e74735f6e756d94477ff00000000000008c165f636865636b706f696e745f73636f72655f6465736394898c165f636865636b706f696e745f73636f72655f61747472948c12747261696e696e675f697465726174696f6e948c1c6e65776573745f70657273697374656e745f636865636b706f696e749468008c0a436865636b706f696e749493942981947d94288c0773746f72616765948c0a70657273697374656e74948c0576616c7565944e8c06726573756c74947d9475628c195f6e65776573745f6d656d6f72795f636865636b706f696e7494680b2981947d9428680e8c066d656d6f72799468104e68117d9475628c115f626573745f636865636b706f696e7473945d948c0b5f6d656d62657273686970948f9475622e"
+      },
+      "restore_path": null,
+      "restoring_from": null,
+      "num_failures": 0,
+      "results": "80044e2e",
+      "best_result": "80044e2e",
+      "param_config": "80044e2e",
+      "extra_arg": "80044e2e",
+      "_nonjson_fields": [
+        "loggers",
+        "sync_to_driver_fn",
+        "results",
+        "best_result",
+        "param_config",
+        "extra_arg"
+      ],
+      "resuming_from": null,
+      "__logger_started__": true
+    },
+    {
+      "trainable_name": "DEFAULT",
+      "trial_id": "e9bfd_00001",
+      "config": {
+        "lr": 0.8122,
+        "momentum": 0.8300000000000001,
+        "dim_lstm_hidden": 128,
+        "dim_fc_hidden": 128,
+        "weight_decay": 1e-05
+      },
+      "local_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+      "evaluated_params": {
+        "lr": 0.8122,
+        "momentum": 0.8300000000000001,
+        "dim_lstm_hidden": 128,
+        "dim_fc_hidden": 128,
+        "weight_decay": 1e-05
+      },
+      "experiment_tag": "1_dim_fc_hidden=128,dim_lstm_hidden=128,lr=0.8122,momentum=0.83,weight_decay=1e-05",
+      "location": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "8004953a000000000000008c0e7261792e74756e652e747269616c948c084c6f636174696f6e9493942981947d94288c08686f73746e616d65944e8c03706964944e75622e"
+      },
+      "resources": {
+        "cpu": 1,
+        "gpu": 0.2,
+        "memory": 0,
+        "object_store_memory": 0,
+        "extra_cpu": 0,
+        "extra_gpu": 0,
+        "extra_memory": 0,
+        "extra_object_store_memory": 0,
+        "custom_resources": {},
+        "extra_custom_resources": {}
+      },
+      "stopping_criterion": {},
+      "loggers": "80044e2e",
+      "log_to_file": [
+        "stdout",
+        "stderr"
+      ],
+      "sync_to_driver_fn": "80044e2e",
+      "verbose": true,
+      "max_failures": 0,
+      "last_result": {},
+      "last_update_time": -Infinity,
+      "metric_analysis": {},
+      "n_steps": [
+        5,
+        10
+      ],
+      "metric_n_steps": {},
+      "export_formats": [],
+      "status": "TERMINATED",
+      "start_time": 1606649270.195179,
+      "logdir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289/DEFAULT_e9bfd_00001_1_dim_fc_hidden=128,dim_lstm_hidden=128,lr=0.8122,momentum=0.83,weight_decay=1e-05_2020-11-29_20-27-50",
+      "runner": null,
+      "result_logger": null,
+      "last_debug": 0,
+      "error_file": null,
+      "error_msg": null,
+      "trial_name_creator": null,
+      "custom_trial_name": null,
+      "custom_dirname": null,
+      "saving_to": null,
+      "remote_checkpoint_dir_prefix": null,
+      "checkpoint_freq": 0,
+      "checkpoint_at_end": false,
+      "keep_checkpoints_num": null,
+      "checkpoint_score_attr": "training_iteration",
+      "sync_on_checkpoint": true,
+      "checkpoint_manager": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "80049566010000000000008c1b7261792e74756e652e636865636b706f696e745f6d616e61676572948c11436865636b706f696e744d616e616765729493942981947d94288c146b6565705f636865636b706f696e74735f6e756d94477ff00000000000008c165f636865636b706f696e745f73636f72655f6465736394898c165f636865636b706f696e745f73636f72655f61747472948c12747261696e696e675f697465726174696f6e948c1c6e65776573745f70657273697374656e745f636865636b706f696e749468008c0a436865636b706f696e749493942981947d94288c0773746f72616765948c0a70657273697374656e74948c0576616c7565944e8c06726573756c74947d9475628c195f6e65776573745f6d656d6f72795f636865636b706f696e7494680b2981947d9428680e8c066d656d6f72799468104e68117d9475628c115f626573745f636865636b706f696e7473945d948c0b5f6d656d62657273686970948f9475622e"
+      },
+      "restore_path": null,
+      "restoring_from": null,
+      "num_failures": 0,
+      "results": "80044e2e",
+      "best_result": "80044e2e",
+      "param_config": "80044e2e",
+      "extra_arg": "80044e2e",
+      "_nonjson_fields": [
+        "loggers",
+        "sync_to_driver_fn",
+        "results",
+        "best_result",
+        "param_config",
+        "extra_arg"
+      ],
+      "resuming_from": null,
+      "__logger_started__": true
+    },
+    {
+      "trainable_name": "DEFAULT",
+      "trial_id": "e9bfd_00002",
+      "config": {
+        "lr": 0.8512000000000001,
+        "momentum": 0.89,
+        "dim_lstm_hidden": 256,
+        "dim_fc_hidden": 64,
+        "weight_decay": 0.0001
+      },
+      "local_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+      "evaluated_params": {
+        "lr": 0.8512000000000001,
+        "momentum": 0.89,
+        "dim_lstm_hidden": 256,
+        "dim_fc_hidden": 64,
+        "weight_decay": 0.0001
+      },
+      "experiment_tag": "2_dim_fc_hidden=64,dim_lstm_hidden=256,lr=0.8512,momentum=0.89,weight_decay=0.0001",
+      "location": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "8004953a000000000000008c0e7261792e74756e652e747269616c948c084c6f636174696f6e9493942981947d94288c08686f73746e616d65944e8c03706964944e75622e"
+      },
+      "resources": {
+        "cpu": 1,
+        "gpu": 0.2,
+        "memory": 0,
+        "object_store_memory": 0,
+        "extra_cpu": 0,
+        "extra_gpu": 0,
+        "extra_memory": 0,
+        "extra_object_store_memory": 0,
+        "custom_resources": {},
+        "extra_custom_resources": {}
+      },
+      "stopping_criterion": {},
+      "loggers": "80044e2e",
+      "log_to_file": [
+        "stdout",
+        "stderr"
+      ],
+      "sync_to_driver_fn": "80044e2e",
+      "verbose": true,
+      "max_failures": 0,
+      "last_result": {},
+      "last_update_time": -Infinity,
+      "metric_analysis": {},
+      "n_steps": [
+        5,
+        10
+      ],
+      "metric_n_steps": {},
+      "export_formats": [],
+      "status": "TERMINATED",
+      "start_time": 1606649270.2037306,
+      "logdir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289/DEFAULT_e9bfd_00002_2_dim_fc_hidden=64,dim_lstm_hidden=256,lr=0.8512,momentum=0.89,weight_decay=0.0001_2020-11-29_20-27-50",
+      "runner": null,
+      "result_logger": null,
+      "last_debug": 0,
+      "error_file": null,
+      "error_msg": null,
+      "trial_name_creator": null,
+      "custom_trial_name": null,
+      "custom_dirname": null,
+      "saving_to": null,
+      "remote_checkpoint_dir_prefix": null,
+      "checkpoint_freq": 0,
+      "checkpoint_at_end": false,
+      "keep_checkpoints_num": null,
+      "checkpoint_score_attr": "training_iteration",
+      "sync_on_checkpoint": true,
+      "checkpoint_manager": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "80049566010000000000008c1b7261792e74756e652e636865636b706f696e745f6d616e61676572948c11436865636b706f696e744d616e616765729493942981947d94288c146b6565705f636865636b706f696e74735f6e756d94477ff00000000000008c165f636865636b706f696e745f73636f72655f6465736394898c165f636865636b706f696e745f73636f72655f61747472948c12747261696e696e675f697465726174696f6e948c1c6e65776573745f70657273697374656e745f636865636b706f696e749468008c0a436865636b706f696e749493942981947d94288c0773746f72616765948c0a70657273697374656e74948c0576616c7565944e8c06726573756c74947d9475628c195f6e65776573745f6d656d6f72795f636865636b706f696e7494680b2981947d9428680e8c066d656d6f72799468104e68117d9475628c115f626573745f636865636b706f696e7473945d948c0b5f6d656d62657273686970948f9475622e"
+      },
+      "restore_path": null,
+      "restoring_from": null,
+      "num_failures": 0,
+      "results": "80044e2e",
+      "best_result": "80044e2e",
+      "param_config": "80044e2e",
+      "extra_arg": "80044e2e",
+      "_nonjson_fields": [
+        "loggers",
+        "sync_to_driver_fn",
+        "results",
+        "best_result",
+        "param_config",
+        "extra_arg"
+      ],
+      "resuming_from": null,
+      "__logger_started__": true
+    },
+    {
+      "trainable_name": "DEFAULT",
+      "trial_id": "e9bfd_00003",
+      "config": {
+        "lr": 0.16090000000000002,
+        "momentum": 0.81,
+        "dim_lstm_hidden": 128,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.001
+      },
+      "local_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+      "evaluated_params": {
+        "lr": 0.16090000000000002,
+        "momentum": 0.81,
+        "dim_lstm_hidden": 128,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.001
+      },
+      "experiment_tag": "3_dim_fc_hidden=128,dim_lstm_hidden=128,lr=0.1609,momentum=0.81,weight_decay=0.001",
+      "location": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "8004953a000000000000008c0e7261792e74756e652e747269616c948c084c6f636174696f6e9493942981947d94288c08686f73746e616d65944e8c03706964944e75622e"
+      },
+      "resources": {
+        "cpu": 1,
+        "gpu": 0.2,
+        "memory": 0,
+        "object_store_memory": 0,
+        "extra_cpu": 0,
+        "extra_gpu": 0,
+        "extra_memory": 0,
+        "extra_object_store_memory": 0,
+        "custom_resources": {},
+        "extra_custom_resources": {}
+      },
+      "stopping_criterion": {},
+      "loggers": "80044e2e",
+      "log_to_file": [
+        "stdout",
+        "stderr"
+      ],
+      "sync_to_driver_fn": "80044e2e",
+      "verbose": true,
+      "max_failures": 0,
+      "last_result": {},
+      "last_update_time": -Infinity,
+      "metric_analysis": {},
+      "n_steps": [
+        5,
+        10
+      ],
+      "metric_n_steps": {},
+      "export_formats": [],
+      "status": "TERMINATED",
+      "start_time": 1606649270.213455,
+      "logdir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289/DEFAULT_e9bfd_00003_3_dim_fc_hidden=128,dim_lstm_hidden=128,lr=0.1609,momentum=0.81,weight_decay=0.001_2020-11-29_20-27-50",
+      "runner": null,
+      "result_logger": null,
+      "last_debug": 0,
+      "error_file": null,
+      "error_msg": null,
+      "trial_name_creator": null,
+      "custom_trial_name": null,
+      "custom_dirname": null,
+      "saving_to": null,
+      "remote_checkpoint_dir_prefix": null,
+      "checkpoint_freq": 0,
+      "checkpoint_at_end": false,
+      "keep_checkpoints_num": null,
+      "checkpoint_score_attr": "training_iteration",
+      "sync_on_checkpoint": true,
+      "checkpoint_manager": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "80049566010000000000008c1b7261792e74756e652e636865636b706f696e745f6d616e61676572948c11436865636b706f696e744d616e616765729493942981947d94288c146b6565705f636865636b706f696e74735f6e756d94477ff00000000000008c165f636865636b706f696e745f73636f72655f6465736394898c165f636865636b706f696e745f73636f72655f61747472948c12747261696e696e675f697465726174696f6e948c1c6e65776573745f70657273697374656e745f636865636b706f696e749468008c0a436865636b706f696e749493942981947d94288c0773746f72616765948c0a70657273697374656e74948c0576616c7565944e8c06726573756c74947d9475628c195f6e65776573745f6d656d6f72795f636865636b706f696e7494680b2981947d9428680e8c066d656d6f72799468104e68117d9475628c115f626573745f636865636b706f696e7473945d948c0b5f6d656d62657273686970948f9475622e"
+      },
+      "restore_path": null,
+      "restoring_from": null,
+      "num_failures": 0,
+      "results": "80044e2e",
+      "best_result": "80044e2e",
+      "param_config": "80044e2e",
+      "extra_arg": "80044e2e",
+      "_nonjson_fields": [
+        "loggers",
+        "sync_to_driver_fn",
+        "results",
+        "best_result",
+        "param_config",
+        "extra_arg"
+      ],
+      "resuming_from": null,
+      "__logger_started__": true
+    },
+    {
+      "trainable_name": "DEFAULT",
+      "trial_id": "e9bfd_00004",
+      "config": {
+        "lr": 0.2651,
+        "momentum": 0.89,
+        "dim_lstm_hidden": 128,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.01
+      },
+      "local_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+      "evaluated_params": {
+        "lr": 0.2651,
+        "momentum": 0.89,
+        "dim_lstm_hidden": 128,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.01
+      },
+      "experiment_tag": "4_dim_fc_hidden=128,dim_lstm_hidden=128,lr=0.2651,momentum=0.89,weight_decay=0.01",
+      "location": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "8004953a000000000000008c0e7261792e74756e652e747269616c948c084c6f636174696f6e9493942981947d94288c08686f73746e616d65944e8c03706964944e75622e"
+      },
+      "resources": {
+        "cpu": 1,
+        "gpu": 0.2,
+        "memory": 0,
+        "object_store_memory": 0,
+        "extra_cpu": 0,
+        "extra_gpu": 0,
+        "extra_memory": 0,
+        "extra_object_store_memory": 0,
+        "custom_resources": {},
+        "extra_custom_resources": {}
+      },
+      "stopping_criterion": {},
+      "loggers": "80044e2e",
+      "log_to_file": [
+        "stdout",
+        "stderr"
+      ],
+      "sync_to_driver_fn": "80044e2e",
+      "verbose": true,
+      "max_failures": 0,
+      "last_result": {},
+      "last_update_time": -Infinity,
+      "metric_analysis": {},
+      "n_steps": [
+        5,
+        10
+      ],
+      "metric_n_steps": {},
+      "export_formats": [],
+      "status": "TERMINATED",
+      "start_time": 1606649270.2276106,
+      "logdir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289/DEFAULT_e9bfd_00004_4_dim_fc_hidden=128,dim_lstm_hidden=128,lr=0.2651,momentum=0.89,weight_decay=0.01_2020-11-29_20-27-50",
+      "runner": null,
+      "result_logger": null,
+      "last_debug": 0,
+      "error_file": null,
+      "error_msg": null,
+      "trial_name_creator": null,
+      "custom_trial_name": null,
+      "custom_dirname": null,
+      "saving_to": null,
+      "remote_checkpoint_dir_prefix": null,
+      "checkpoint_freq": 0,
+      "checkpoint_at_end": false,
+      "keep_checkpoints_num": null,
+      "checkpoint_score_attr": "training_iteration",
+      "sync_on_checkpoint": true,
+      "checkpoint_manager": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "80049566010000000000008c1b7261792e74756e652e636865636b706f696e745f6d616e61676572948c11436865636b706f696e744d616e616765729493942981947d94288c146b6565705f636865636b706f696e74735f6e756d94477ff00000000000008c165f636865636b706f696e745f73636f72655f6465736394898c165f636865636b706f696e745f73636f72655f61747472948c12747261696e696e675f697465726174696f6e948c1c6e65776573745f70657273697374656e745f636865636b706f696e749468008c0a436865636b706f696e749493942981947d94288c0773746f72616765948c0a70657273697374656e74948c0576616c7565944e8c06726573756c74947d9475628c195f6e65776573745f6d656d6f72795f636865636b706f696e7494680b2981947d9428680e8c066d656d6f72799468104e68117d9475628c115f626573745f636865636b706f696e7473945d948c0b5f6d656d62657273686970948f9475622e"
+      },
+      "restore_path": null,
+      "restoring_from": null,
+      "num_failures": 0,
+      "results": "80044e2e",
+      "best_result": "80044e2e",
+      "param_config": "80044e2e",
+      "extra_arg": "80044e2e",
+      "_nonjson_fields": [
+        "loggers",
+        "sync_to_driver_fn",
+        "results",
+        "best_result",
+        "param_config",
+        "extra_arg"
+      ],
+      "resuming_from": null,
+      "__logger_started__": true
+    },
+    {
+      "trainable_name": "DEFAULT",
+      "trial_id": "e9bfd_00005",
+      "config": {
+        "lr": 0.1413,
+        "momentum": 0.99,
+        "dim_lstm_hidden": 512,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.001
+      },
+      "local_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+      "evaluated_params": {
+        "lr": 0.1413,
+        "momentum": 0.99,
+        "dim_lstm_hidden": 512,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.001
+      },
+      "experiment_tag": "5_dim_fc_hidden=128,dim_lstm_hidden=512,lr=0.1413,momentum=0.99,weight_decay=0.001",
+      "location": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "8004953a000000000000008c0e7261792e74756e652e747269616c948c084c6f636174696f6e9493942981947d94288c08686f73746e616d65944e8c03706964944e75622e"
+      },
+      "resources": {
+        "cpu": 1,
+        "gpu": 0.2,
+        "memory": 0,
+        "object_store_memory": 0,
+        "extra_cpu": 0,
+        "extra_gpu": 0,
+        "extra_memory": 0,
+        "extra_object_store_memory": 0,
+        "custom_resources": {},
+        "extra_custom_resources": {}
+      },
+      "stopping_criterion": {},
+      "loggers": "80044e2e",
+      "log_to_file": [
+        "stdout",
+        "stderr"
+      ],
+      "sync_to_driver_fn": "80044e2e",
+      "verbose": true,
+      "max_failures": 0,
+      "last_result": {},
+      "last_update_time": -Infinity,
+      "metric_analysis": {},
+      "n_steps": [
+        5,
+        10
+      ],
+      "metric_n_steps": {},
+      "export_formats": [],
+      "status": "TERMINATED",
+      "start_time": 1606649270.24808,
+      "logdir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289/DEFAULT_e9bfd_00005_5_dim_fc_hidden=128,dim_lstm_hidden=512,lr=0.1413,momentum=0.99,weight_decay=0.001_2020-11-29_20-27-50",
+      "runner": null,
+      "result_logger": null,
+      "last_debug": 0,
+      "error_file": null,
+      "error_msg": null,
+      "trial_name_creator": null,
+      "custom_trial_name": null,
+      "custom_dirname": null,
+      "saving_to": null,
+      "remote_checkpoint_dir_prefix": null,
+      "checkpoint_freq": 0,
+      "checkpoint_at_end": false,
+      "keep_checkpoints_num": null,
+      "checkpoint_score_attr": "training_iteration",
+      "sync_on_checkpoint": true,
+      "checkpoint_manager": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "80049566010000000000008c1b7261792e74756e652e636865636b706f696e745f6d616e61676572948c11436865636b706f696e744d616e616765729493942981947d94288c146b6565705f636865636b706f696e74735f6e756d94477ff00000000000008c165f636865636b706f696e745f73636f72655f6465736394898c165f636865636b706f696e745f73636f72655f61747472948c12747261696e696e675f697465726174696f6e948c1c6e65776573745f70657273697374656e745f636865636b706f696e749468008c0a436865636b706f696e749493942981947d94288c0773746f72616765948c0a70657273697374656e74948c0576616c7565944e8c06726573756c74947d9475628c195f6e65776573745f6d656d6f72795f636865636b706f696e7494680b2981947d9428680e8c066d656d6f72799468104e68117d9475628c115f626573745f636865636b706f696e7473945d948c0b5f6d656d62657273686970948f9475622e"
+      },
+      "restore_path": null,
+      "restoring_from": null,
+      "num_failures": 0,
+      "results": "80044e2e",
+      "best_result": "80044e2e",
+      "param_config": "80044e2e",
+      "extra_arg": "80044e2e",
+      "_nonjson_fields": [
+        "loggers",
+        "sync_to_driver_fn",
+        "results",
+        "best_result",
+        "param_config",
+        "extra_arg"
+      ],
+      "resuming_from": null,
+      "__logger_started__": true
+    },
+    {
+      "trainable_name": "DEFAULT",
+      "trial_id": "e9bfd_00006",
+      "config": {
+        "lr": 0.1816,
+        "momentum": 0.91,
+        "dim_lstm_hidden": 512,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.01
+      },
+      "local_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+      "evaluated_params": {
+        "lr": 0.1816,
+        "momentum": 0.91,
+        "dim_lstm_hidden": 512,
+        "dim_fc_hidden": 128,
+        "weight_decay": 0.01
+      },
+      "experiment_tag": "6_dim_fc_hidden=128,dim_lstm_hidden=512,lr=0.1816,momentum=0.91,weight_decay=0.01",
+      "location": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "8004953a000000000000008c0e7261792e74756e652e747269616c948c084c6f636174696f6e9493942981947d94288c08686f73746e616d65944e8c03706964944e75622e"
+      },
+      "resources": {
+        "cpu": 1,
+        "gpu": 0.2,
+        "memory": 0,
+        "object_store_memory": 0,
+        "extra_cpu": 0,
+        "extra_gpu": 0,
+        "extra_memory": 0,
+        "extra_object_store_memory": 0,
+        "custom_resources": {},
+        "extra_custom_resources": {}
+      },
+      "stopping_criterion": {},
+      "loggers": "80044e2e",
+      "log_to_file": [
+        "stdout",
+        "stderr"
+      ],
+      "sync_to_driver_fn": "80044e2e",
+      "verbose": true,
+      "max_failures": 0,
+      "last_result": {},
+      "last_update_time": -Infinity,
+      "metric_analysis": {},
+      "n_steps": [
+        5,
+        10
+      ],
+      "metric_n_steps": {},
+      "export_formats": [],
+      "status": "TERMINATED",
+      "start_time": null,
+      "logdir": null,
+      "runner": null,
+      "result_logger": null,
+      "last_debug": 0,
+      "error_file": null,
+      "error_msg": null,
+      "trial_name_creator": null,
+      "custom_trial_name": null,
+      "custom_dirname": null,
+      "saving_to": null,
+      "remote_checkpoint_dir_prefix": null,
+      "checkpoint_freq": 0,
+      "checkpoint_at_end": false,
+      "keep_checkpoints_num": null,
+      "checkpoint_score_attr": "training_iteration",
+      "sync_on_checkpoint": true,
+      "checkpoint_manager": {
+        "_type": "CLOUDPICKLE_FALLBACK",
+        "value": "80049566010000000000008c1b7261792e74756e652e636865636b706f696e745f6d616e61676572948c11436865636b706f696e744d616e616765729493942981947d94288c146b6565705f636865636b706f696e74735f6e756d94477ff00000000000008c165f636865636b706f696e745f73636f72655f6465736394898c165f636865636b706f696e745f73636f72655f61747472948c12747261696e696e675f697465726174696f6e948c1c6e65776573745f70657273697374656e745f636865636b706f696e749468008c0a436865636b706f696e749493942981947d94288c0773746f72616765948c0a70657273697374656e74948c0576616c7565944e8c06726573756c74947d9475628c195f6e65776573745f6d656d6f72795f636865636b706f696e7494680b2981947d9428680e8c066d656d6f72799468104e68117d9475628c115f626573745f636865636b706f696e7473945d948c0b5f6d656d62657273686970948f9475622e"
+      },
+      "restore_path": null,
+      "restoring_from": null,
+      "num_failures": 0,
+      "results": "80044e2e",
+      "best_result": "80044e2e",
+      "param_config": "80044e2e",
+      "extra_arg": "80044e2e",
+      "_nonjson_fields": [
+        "loggers",
+        "sync_to_driver_fn",
+        "results",
+        "best_result",
+        "param_config",
+        "extra_arg"
+      ],
+      "resuming_from": null,
+      "__logger_started__": false
+    }
+  ],
+  "runner_data": {
+    "_metric": null,
+    "_total_time": 0,
+    "_iteration": 7,
+    "_has_errored": true,
+    "_fail_fast": true,
+    "_verbose": true,
+    "_server_port": null,
+    "_cached_trial_decisions": {},
+    "_should_stop_experiment": false,
+    "_local_checkpoint_dir": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289",
+    "_remote_checkpoint_dir": null,
+    "_stopper": {
+      "_type": "CLOUDPICKLE_FALLBACK",
+      "value": "80049527000000000000008c107261792e74756e652e73746f70706572948c0b4e6f6f7053746f707065729493942981942e"
+    },
+    "_resumed": false,
+    "_start_time": 1606649270.1255314,
+    "_last_checkpoint_time": 1606649279.9186366,
+    "_checkpoint_period": 10,
+    "_session_str": "2020-11-29_20-27-50",
+    "checkpoint_file": "/home/mi-lab02/rnn_classifier/ray_results/20201129_20_27_47_289/experiment_state-2020-11-29_20-27-50.json",
+    "launch_web_server": false
+  },
+  "stats": {
+    "start_time": 1606649270.1255314,
+    "timestamp": 1606649279.9186366
+  }
+}
